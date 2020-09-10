@@ -1,0 +1,102 @@
+.App {
+  text-align: center;
+}
+
+.header-color{
+  background-color:rgb(12, 110, 122);
+}
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+#todo-form input{
+  margin:20px;
+  height:30px;
+  width:300px
+}
+
+#todos {
+  border: 1px solid gray;
+  padding:15px;
+  background-color: rgb(226, 224, 224);
+  width: 700px;
+}
+
+#todo-form button:hover{
+ 
+ background-color:green
+  
+}
+
+
+.ItemStyle,.EditStyle{
+  margin:20px;
+}
+.EditStyle:hover{
+ 
+  background-color: rgb(31, 243, 208)
+}
+.ItemStyle:hover{
+ 
+  background-color:crimson
+}
+
+.list li input{
+  background-color: transparent;
+  border:0;
+  color:black;
+  font-size: 18px;
+}
+/* .list li input:focus{
+  outline: none;
+} */
+.GreenColor li input{
+  background-color: green;
+}
+.YellowColor li input{
+  background-color: yellow;
+}
+.FavStyle:hover{
+  cursor: pointer;
+}
+
+.pagination label,.pagination select ,.pagination option{
+  
+  margin:10px;
+  display: inline-block;
+  
+}
+
+#checkBox{
+  margin:10px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color:white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: top;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
