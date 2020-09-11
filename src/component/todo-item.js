@@ -3,7 +3,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
-function TodoItem({ itemProp, onSelect, index, id, setUpdate,handleFavouriteProp }) {
+function TodoItem({ itemProp, onSelect, index, id, setUpdate,handleFavouriteProp,handleStatusChangeProp }) {
 
 
     const [color, setColor] = useState()
@@ -24,10 +24,10 @@ function TodoItem({ itemProp, onSelect, index, id, setUpdate,handleFavouriteProp
 
 
     if (color !== "") {
-        if (color === "2") {
+        if (color === "Completed") {
             ColorClass = "GreenColor"
         }
-        else if (color === "3") {
+        else if (color === "On-Hold") {
             ColorClass = "YellowColor"
         }
     }
@@ -36,6 +36,14 @@ function TodoItem({ itemProp, onSelect, index, id, setUpdate,handleFavouriteProp
         if(itemProp.favourite){
             setStyleColor('red')
         }
+    },[])
+
+    
+    useEffect(()=>{
+        if(itemProp.status){
+                setColor(itemProp.status);
+            }
+        
     },[])
 
     const handleClick = (e,id)=>{
@@ -47,6 +55,15 @@ function TodoItem({ itemProp, onSelect, index, id, setUpdate,handleFavouriteProp
         else{
             setStyleColor("")
         }
+    }
+
+    const handleStatus = (e,id)=>{
+        
+
+     handleStatusChangeProp(id,e.target.value);
+
+        setColor(itemProp.status);
+
     }
 
     const onKeyUp = (e)=>{
@@ -74,10 +91,10 @@ function TodoItem({ itemProp, onSelect, index, id, setUpdate,handleFavouriteProp
 
 
 
-                        <select id="record" onChange={(e) => { setColor(e.target.value) }} >
-                            <option defaultValue="1">In-progress</option>
-                            <option value="2">Completed</option>
-                            <option value="3">On-hold</option>
+                        <select id="record" value={itemProp.status} onChange={(e) =>  handleStatus(e,id) } >
+                            <option value="In-progress">In-progress</option>
+                            <option value="Completed">Completed</option>
+                            <option value="On-Hold">On-Hold</option>
                         </select>
 
                         <button className="EditStyle" onClick={() => { setOption("") }}>
@@ -96,6 +113,8 @@ function TodoItem({ itemProp, onSelect, index, id, setUpdate,handleFavouriteProp
                         
                     </li>
                 </div>
+
+                
             </div>
         </>
     );
