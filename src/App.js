@@ -11,14 +11,14 @@ function App() {
 
   const [todo, setTodo] = useState({
     items: [
-      { text: "apple", key: 1, favourite: false, status: "In-Progress"},
-      { text: "banana", key: 2, favourite: false, status: "In-Progress" },
-      { text: "carrot", key: 3, favourite: false, status: "In-Progress"},
-      { text: "date plum", key: 4, favourite: false, status: "In-Progress"},
-      { text: "egg", key: 5, favourite: false, status: "In-Progress"},
-      { text: "fish", key: 6, favourite: false, status: "In-Progress"},
-      { text: "grapes", key: 7, favourite: false, status: "In-Progress"},
-      { text: "honey", key: 8, favourite: false, status: "In-Progress"}
+      { text: "apple", key: 1, favourite: false, status: "In-Progress", select: false },
+      { text: "banana", key: 2, favourite: false, status: "In-Progress", select: false },
+      { text: "carrot", key: 3, favourite: false, status: "In-Progress", select: false },
+      { text: "date plum", key: 4, favourite: false, status: "In-Progress", select: false },
+      { text: "egg", key: 5, favourite: false, status: "In-Progress", select: false },
+      { text: "fish", key: 6, favourite: false, status: "In-Progress", select: false },
+      { text: "grapes", key: 7, favourite: false, status: "In-Progress", select: false },
+      { text: "honey", key: 8, favourite: false, status: "In-Progress", select: false }
     ]
   });
   const [todos, setTodos] = useState({
@@ -27,13 +27,17 @@ function App() {
       key: "",
       favourite: "",
       status: "",
-      option:""
+      option: ""
     }
   });
 
   const [search, setSearch] = useState("");
 
   const [filteredItems, setFilteredItems] = useState(todo.items);
+
+  const [allChecked, setAllChecked] = useState(false)
+
+  const [allDropdown, setAllDropdown] = useState("In-Progress")
 
 
   const inputRef = useRef(null);
@@ -131,6 +135,11 @@ function App() {
 
     setFilteredItems(filteredItemsSearch)
 
+    if(filteredItems.length==0)
+    {
+      alert("no record")
+    }
+
   }, [search])
 
 
@@ -171,13 +180,13 @@ function App() {
     }
   }
 
-  const handleStatusChange = (id,val)=>{
+  const handleStatusChange = (id, val) => {
     let items = todo.items.map((t) => {
 
       if (t.key === id) {
 
         t.status = val;
-        localStorage.setItem("todoStatus",JSON.stringify(todo.items))
+        localStorage.setItem("todoStatus", JSON.stringify(todo.items))
       }
       return t;
     })
@@ -187,51 +196,110 @@ function App() {
     })
   }
 
-  const handleComplete = (e)=>{
+
+
+  const handleSelectAll = (e) => {
+
 
     if (e.target.checked) {
-    let completeItems = todo.items.filter((t) => {
+      setAllChecked(true)
+      let selectAll = todo.items.map((s) => {
+        s.select = true
+        return s;
+      })
 
-      return t.status === "Completed";
-    })
-    setFilteredItems(completeItems)
+      setTodo({
+        items: selectAll
+      })
+    }
+
+    else {
+      setAllChecked(false)
+      let deSelectAll = todo.items.map((s) => {
+        s.select = false
+        return s;
+      })
+
+      setTodo({
+        items: deSelectAll
+      })
+    }
+
+
+    console.log(todo.items)
+
   }
-  else
 
-  setFilteredItems(todo.items)
 
+  const handleSelectStatus = (e) => {
+
+
+    setAllDropdown(e.target.value)
+
+    if (true) {
+      let selectAllStatus = todo.items.map((s) => {
+        if(s.select === true){
+        s.status = e.target.value
+        }
+        return s;
+      })
+
+      setTodo({
+        items: selectAllStatus
+      })
+    }
+
+    console.log(todo.items)
 
   }
 
 
-  const handleOnHold = (e)=>{
+  const handleComplete = (e) => {
 
     if (e.target.checked) {
-    let completeItems = todo.items.filter((t) => {
+      let completeItems = todo.items.filter((t) => {
 
-      return t.status === "On-Hold";
-    })
-    setFilteredItems(completeItems)
+        return t.status === "Completed";
+      })
+      setFilteredItems(completeItems)
+    }
+    else{
+
+      setFilteredItems(todo.items)
+    }
+    console.log(filteredItems)
+
   }
-  else
-
-  setFilteredItems(todo.items)
 
 
-  }
-
-  const handleAll = (e)=>{
+  const handleOnHold = (e) => {
 
     if (e.target.checked) {
-    let completeItems = todo.items.filter((t) => {
+      let completeItems = todo.items.filter((t) => {
 
-      return t.status === "On-Hold"||"Completed"||"In-Progress";
-    })
-    setFilteredItems(completeItems)
+        return t.status === "On-Hold";
+      })
+      setFilteredItems(completeItems)
+    }
+    else
+
+      setFilteredItems(todo.items)
+
+
   }
-  else
 
-  setFilteredItems(todo.items)
+  const handleAll = (e) => {
+
+    if (e.target.checked) {
+      let completeItems = todo.items.filter((t) => {
+
+        return t.status === "On-Hold" || "Completed" || "In-Progress";
+      })
+      setFilteredItems(completeItems)
+    }
+    else
+
+      setFilteredItems(todo.items)
 
 
   }
@@ -258,7 +326,51 @@ function App() {
 
   }
 
-console.log(filteredItems)
+  const setItemCheck = (e, id) => {
+
+    if (e.checked) {
+
+
+      var handleSingle = todo.items.map((i) => {
+
+        if (i.key === id) {
+          i.select = !i.select
+        }
+        return i;
+      })
+
+      
+    setFilteredItems(handleSingle)
+
+    setTodo({
+      items:handleSingle
+    })
+
+
+    }
+    else {
+
+      var handleSingle1 = todo.items.map((i) => {
+
+        if (i.key === id) {
+          i.select = !i.select
+        }
+        return i;
+      })
+
+      
+    setFilteredItems(handleSingle1)
+
+    setTodo({
+      items:handleSingle1
+    })
+
+    }
+    
+  
+  }
+
+  console.log(filteredItems)
 
 
 
@@ -276,40 +388,51 @@ console.log(filteredItems)
         <h2> What do you want to do today ?  </h2>
         <div>
           <form id="todo-form">
-            <input type="text" placeholder="Learn Coding" name="todo"
+            <input type="text" placeholder="Add task" name="todo"
               ref={inputRef}
               value={todos.currentItem.text} onChange={handleChange} />
-            <button variant="outlined" color="primary" onClick={handleClick}>
+            <button  onClick={handleClick}>
               <AddIcon />
             </button>
 
-           
+
             <div className="searchText">
-              
-            <input type="text" placeholder="Search... "
+
+              <input type="text" placeholder="Search... "
                 value={search} onChange={handleSearch}
               />
 
             </div>
-            
+
 
           </form>
 
 
-
           <div className="radioButton">
-          <h5> 
-            <input type="radio" id="all " name="status" value="all"  onClick={handleAll}/>
+            <h5>
+              <input type="checkBox" onClick={handleSelectAll} /> Select All
+
+
+
+          <select id="status" value={allDropdown} onChange={(e) => handleSelectStatus(e)} >
+                <option value="In-progress">In-Progress</option>
+                <option value="Completed">Completed</option>
+                <option value="On-Hold">On-Hold</option>
+              </select>
+
+
+
+              <input type="radio" id="all " name="status" value="all" defaultChecked onClick={handleAll} />
            All
-            
-            <input type="radio" id="completed" name="status" value="complete"  onClick={handleComplete}/>
+
+            <input type="radio" id="completed" name="status" value="complete" onClick={handleComplete} />
             Completed
-            
-            <input type="radio" id="on-hold" name="status" value="on-hold"   onClick={handleOnHold}/>
+
+            <input type="radio" id="on-hold" name="status" value="on-hold" onClick={handleOnHold} />
             On-Hold
             </h5>
-            
-            </div>
+
+          </div>
         </div>
         <div id="todos">
           <ul>
@@ -324,7 +447,9 @@ console.log(filteredItems)
                     index={index}
                     id={item.key}
                     handleFavouriteProp={handleFavourite}
-                    handleStatusChangeProp={handleStatusChange} />
+                    handleStatusChangeProp={handleStatusChange}
+                    setItemCheckProp={setItemCheck}
+                    filteredItemsProp={filteredItems} />
                 )
               })
             }
@@ -340,7 +465,7 @@ console.log(filteredItems)
         </div>
         <Pagination showPerPageProp={showPerPage}
           onPaginationChangeProp={onPaginationChange}
-          itemLength={todo.items.length}
+          itemLength={filteredItems.length}
           setShowPerPageProp={setShowPerPage}>
         </Pagination>
       </div>

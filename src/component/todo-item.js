@@ -3,7 +3,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
-function TodoItem({ itemProp, onSelect, index, id, setUpdate,handleFavouriteProp,handleStatusChangeProp }) {
+function TodoItem({ itemProp, onSelect, index, id, setUpdate,handleFavouriteProp,handleStatusChangeProp,setItemCheckProp,filteredItemsProp }) {
 
 
     const [color, setColor] = useState()
@@ -44,7 +44,7 @@ function TodoItem({ itemProp, onSelect, index, id, setUpdate,handleFavouriteProp
                 setColor(itemProp.status);
             }
         
-    },[])
+    },[itemProp.status])
 
     const handleClick = (e,id)=>{
         handleFavouriteProp(id)
@@ -74,15 +74,27 @@ function TodoItem({ itemProp, onSelect, index, id, setUpdate,handleFavouriteProp
         }
     }
 
+    const handleSingleCheck = (e,id)=>{
+
+        setItemCheckProp(e,id)
+       
+
+    }
+
     return (
         <>
+        {/* {
+        itemProp.length &&
+            <p> No Todos !! </p>
+        } */}
+       
 
             <div className="list">
 
                 <div className={ColorClass}>
-                    <li >
+                    <div className="orderedList" >
                         
-                        <input id="checkBox" type="checkbox"/>
+                        <input id="checkBox" value="singleSelect" type="checkbox" checked={itemProp.select} onClick={(e)=>handleSingleCheck(e,id)}/>
 
                         <input  type="text" disabled={option} ref={editRef}
                             value={itemProp.text}
@@ -92,7 +104,7 @@ function TodoItem({ itemProp, onSelect, index, id, setUpdate,handleFavouriteProp
 
 
                         <select id="record" value={itemProp.status} onChange={(e) =>  handleStatus(e,id) } >
-                            <option value="In-progress">In-progress</option>
+                            <option value="In-progress">In-Progress</option>
                             <option value="Completed">Completed</option>
                             <option value="On-Hold">On-Hold</option>
                         </select>
@@ -111,11 +123,12 @@ function TodoItem({ itemProp, onSelect, index, id, setUpdate,handleFavouriteProp
                         onClick={(e)=>handleClick(e,id)}/>
 
                         
-                    </li>
+                    </div>
                 </div>
 
                 
             </div>
+
         </>
     );
 }
