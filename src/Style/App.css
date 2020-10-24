@@ -10,8 +10,10 @@
 
 }
 
+
+
 .header-color{
-  background-color:rgb(12, 110, 122);
+  background-color:rgba(59, 85, 201, 0.836);
 }
 .App-logo {
   height: 40vmin;
@@ -23,17 +25,25 @@
   width:300px
 }
 
+.radioButton select option, .radioButton select {
+  font-size: 20px;
+}
+
 #todos {
-  border: 1px solid gray;
+  border: 4px solid black;
   padding:15px;
-  background-color: rgb(226, 224, 224);
-  width: 700px;
+  background-color: rgb(47, 76, 110);
+  width: 750px;
+  color: wheat;
 }
 
 #todo-form button:hover{
  
  background-color:green
   
+}
+#todo-form button{
+border-radius: 10px;
 }
 
 
@@ -52,7 +62,7 @@
 .orderedList input{
   background-color: transparent;
   border:0;
-  color:black;
+  color:white;
   font-size: 18px;
 }
 /* .list li input:focus{
@@ -62,11 +72,19 @@
   background-color: green;
   color:white
 }
+.BlueColor input{
+  background-color: blueviolet;
+  color:white
+}
 .YellowColor input{
   background-color: yellow;
+  color: black;
 }
 .FavStyle:hover{
   cursor: pointer;
+}
+.FavStyle{
+  size:100px;
 }
 
 .pagination label,.pagination select ,.pagination option{
@@ -87,7 +105,7 @@ cursor: pointer;
 }
 
 .BookMark label:hover{
-color: brown;
+color: rgb(84, 112, 235);
 
 }
 
@@ -98,6 +116,24 @@ color: lawngreen;
 #checkBox{
   margin:10px;
 }
+.d{
+  background-color: #63486e;
+  margin-top: 5px;
+  color: black;
+  
+}
+.b{
+  background-color:whitesmoke;
+  margin-top: 5px;
+  color: black;
+  
+}
+.f button{
+  /* background-color: #9e9ea1; */
+  /* background-color:pink; */
+  background-color:rgb(80, 145, 145);
+  border-radius: 10px;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -106,7 +142,7 @@ color: lawngreen;
 }
 
 .App-header {
-  background-color:white;
+  background-color: #d3d6b1;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -126,8 +162,11 @@ margin:10px;
 
 }
 
-.searchText input{
-  margin-right: 600px;
+.searchText{
+  margin-right: 40px;
+  /* color: #61dafb;
+  background-color: #63486e; */
+  /* vertical-align: 0px; */
 }
 
 .App-link {

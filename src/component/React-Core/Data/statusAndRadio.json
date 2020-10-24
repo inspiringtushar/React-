@@ -1,0 +1,33 @@
+[
+    {
+        "id": 1,
+        "StatusNameCons": "status",
+        "StatusName": "All",
+        "Value": "All"
+    },
+    {
+        "id": 2,
+        "StatusName": "To do",
+        "Value": "To do"
+    },
+    {
+        "id": 3,
+        "StatusName": "Completed",
+        "Value": "Completed"
+    },
+    {
+        "id": 4,
+        "StatusName": "On-Hold",
+        "Value": "On-Hold"
+    },
+    {
+        "id": 5,
+        "StatusName": "In-Progress",
+        "Value": "In-Progress"
+    },
+    {
+        "id": 6,
+        "StatusName": "Done",
+        "Value": "Done"
+    }
+]
